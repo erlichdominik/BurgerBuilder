@@ -1,6 +1,5 @@
 import React from 'react';
 import Logo from '../../Logo/Logo';
-import NavigationItem from '../NavigationItems/NavigationItem/NavigationItem';
 
 import './SideDrawer.css';
 import NavigationItems from '../NavigationItems/NavigationItems';

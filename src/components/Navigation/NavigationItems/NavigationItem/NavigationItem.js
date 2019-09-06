@@ -6,7 +6,9 @@ import './NavigationItem.css';
 const navigationItem = (props) => {
     return (
         <li className="NavigationItem">
-            <NavLink to={props.link} className={props.active ? "active" : null}>{props.children}</NavLink></li>
+            <NavLink
+                to={props.link}
+                exact={props.exact}>{props.children}</NavLink></li>
     );
 }
 
