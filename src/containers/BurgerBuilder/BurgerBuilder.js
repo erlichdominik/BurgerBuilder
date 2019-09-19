@@ -16,11 +16,7 @@ class BurgerBuilder extends Component {
   };
 
   componentDidMount() {
-    // axios
-    //   .get("https://react-my-burger-42f62.firebaseio.com/ingredients.json")
-    //   .then(respo  nse => {
-    //     this.setState({ ingredients: response.data });
-    //   });
+    this.props.onIngredientMounted();
   }
 
   updatePurchaseState = ingredient => {
@@ -45,6 +41,7 @@ class BurgerBuilder extends Component {
       purchasing: false
     });
   };
+
   purchaseContinueHandler = () => {
     this.props.history.push("/checkout");
   };
@@ -53,6 +50,7 @@ class BurgerBuilder extends Component {
     const disabledInfo = {
       ...this.props.ings
     };
+
     for (let key in disabledInfo) {
       disabledInfo[key] = disabledInfo[key] <= 0;
     }
@@ -86,9 +84,11 @@ class BurgerBuilder extends Component {
         />
       );
     }
+
     if (this.state.loading) {
       orderSummary = <Spinner />;
     }
+
     return (
       <>
         <Modal
@@ -105,8 +105,9 @@ class BurgerBuilder extends Component {
 
 const mapStateToProps = state => {
   return {
-    ings: state.ingredients,
-    totalPrice: state.totalPrice
+    ings: state.brg.ingredients,
+    totalPrice: state.brg.totalPrice,
+    error: state.brg.error
   };
 };
 
@@ -115,7 +116,8 @@ const mapDispatchToProps = dispatch => {
     onIngredientAdded: ingredientName =>
       dispatch(actionCreators.addIngredient(ingredientName)),
     onIngredientRemoved: ingredientName =>
-      dispatch(actionCreators.removeIngredient(ingredientName))
+      dispatch(actionCreators.removeIngredient(ingredientName)),
+    onIngredientMounted: () => dispatch(actionCreators.asyncMountIngredients())
   };
 };
 
