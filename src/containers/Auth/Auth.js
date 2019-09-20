@@ -44,6 +44,15 @@ class Auth extends Component {
         config: this.state.controls[key]
       });
     }
+
+    const form = formElementsArray.map(formElement => {
+      <Input
+        key={formElement.id}
+        elementType={formElement.elementConfig.elementConfig}
+        value={formElement.value}
+      />;
+    });
+
     return (
       <div>
         <form></form>
